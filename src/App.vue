@@ -4,10 +4,28 @@ import {ref} from 'vue'
 
 
 // const text = "type note here"
-const items = ref([])
+let items = ref([])
 const newNote = ref("")
 const noteTitle = ref('')
 const noteBody = ref('')
+
+const displayNote = ()=>{
+  fetch('http://localhost:3000/notes/', {
+  method: 'GET', 
+  headers: {"Content-Type": "application/json"}, 
+})
+.then(res => res.json())
+.then(
+
+  data =>{ 
+    console.log(data)
+    items.value=data 
+  }
+
+  // or whatever you need to do
+)
+  
+}
 
 
 const saveNote = (note)=>{
@@ -30,6 +48,8 @@ const saveNote = (note)=>{
   newNote.value=""
 {{ newNote }}
 }
+
+displayNote()
 
 </script>
 
