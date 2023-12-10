@@ -1,11 +1,14 @@
 <script setup>
 import { ref } from "vue";
 
+const url = "http://localhost:3000/notes/"
 
 let items = ref([]);
 const newNote = ref("");
 const noteTitle = ref("");
 const noteBody = ref("");
+
+
 
 const displayNote = () => {
   fetch("http://localhost:3000/notes/", {
@@ -15,11 +18,11 @@ const displayNote = () => {
     .then((res) => res.json())
     .then(
       (data) => {
-        // console.log(data)
+        
         items.value = data;
+       
       }
 
-      // or whatever you need to do
     );
 };
 
@@ -38,10 +41,8 @@ const saveNote = (note) => {
     .then(
       (data) => console.log(data)
 
-      // or whatever you need to do
     );
-  // items.value.push({id:items.value.length +1, label: newNote })
-  // newNote.value=""
+
 
   items.value.push({ title: noteTitle.value, body: noteBody.value });
   newNote.value = "";
@@ -54,25 +55,45 @@ const saveNote = (note) => {
 
 displayNote();
 
-const deleteNote = () => {
-  fetch("http://localhost:3000/notes/", {
+const deleteNote = (id) => {
+  fetch(url + id, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
     .then(
       (data) => {
-        // console.log(data)
+        
         items.value = data;
+        displayNote();
       }
 
       // or whatever you need to do
     );
 };
 
-// function deleteNote(notes) {
-//   items.value = items.value.filter((item) => item !== items);
-// }
+const editNote = (id) => {
+  fetch(url + id, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: noteTitle.value,
+      body: noteBody.value,
+     
+    }),
+  })
+    .then((res) => res.json())
+    .then(
+      (data) => {
+        
+        items.value = data;
+        console.log(data)
+        displayNote();
+      }
+
+      
+    );
+};
 
 </script>
 
@@ -88,9 +109,11 @@ const deleteNote = () => {
     <div v-for="item in items" :key="item.id">
       {{ item.title }}
       {{ item.body }}
-      <button @click="deleteNote(notes)">Delete</button>
+      <button @click.prevent="deleteNote(item.id)">Delete</button>
+      <button @click.prevent="editNote(item.id)">Edit</button>
     </div>
   </div>
+ 
 </template>
 
 <style scoped></style>
