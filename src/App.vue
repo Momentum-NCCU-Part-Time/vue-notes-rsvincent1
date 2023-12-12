@@ -101,14 +101,17 @@ const editNote = (id) => {
       <input class="inputBody" v-model.trim="noteBody"  placeholder="Body" type="text" />
       <button class="saveButton">Save note</button>
     </form>
-    <div class="createdNote" v-for="item in items" :key="item.id">
+    <div class="note-list" >
+
+    <div v-for="item in items" :key="item.id">
      <span class="titleNote"> {{ item.title }} </span>
      <span class="bodyNote"> {{ item.body }}</span>
      <span class="updateTime">{{ item.updatedAt }}</span>
       <button @click.prevent="deleteNote(item.id)">Delete</button>
       <button @click.prevent="editNote(item.id)">Edit</button>
     </div>
-     <NotesList />
+  </div>
+
   </div>
  
 </template>
