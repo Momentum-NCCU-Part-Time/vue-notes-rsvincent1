@@ -1,4 +1,6 @@
 <script setup>
+// import NoteList from "./assets/components/NoteList.vue"
+
 import { ref } from "vue";
 
 const url = "http://localhost:3000/notes/"
@@ -11,7 +13,7 @@ const noteBody = ref("");
 
 
 const displayNote = () => {
-  fetch("http://localhost:3000/notes/", {
+  fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   })
@@ -28,23 +30,18 @@ const displayNote = () => {
 
 const saveNote = (note) => {
   const { title, body } = note;
-  fetch("http://localhost:3000/notes/", {
+  fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       title: noteTitle.value,
       body: noteBody.value,
-     
+      updatedAt: new Date()
     }),
   })
     .then((res) => res.json())
-    .then(
-      (data) => console.log(data)
 
-    );
-
-
-  items.value.push({ title: noteTitle.value, body: noteBody.value });
+  items.value.push({ title: noteTitle.value, body: noteBody.value,  updatedAt: new Date()});
   newNote.value = "";
   {
     {
@@ -68,7 +65,6 @@ const deleteNote = (id) => {
         displayNote();
       }
 
-      // or whatever you need to do
     );
 };
 
@@ -87,7 +83,6 @@ const editNote = (id) => {
       (data) => {
         
         items.value = data;
-        console.log(data)
         displayNote();
       }
 
@@ -98,20 +93,22 @@ const editNote = (id) => {
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Vue Notes</h1>
 
     <form class="add-note-form" @submit.prevent="saveNote">
-      <input v-model.trim="noteTitle" type="text" />
-      <input v-model.trim="noteBody" type="text" />
-      <button>Save note</button>
+      <input class="inputTitle" v-model.trim="noteTitle" placeholder="Title" type="text" />
+      <input class="inputBody" v-model.trim="noteBody"  placeholder="Body" type="text" />
+      <button class="saveButton">Save note</button>
     </form>
-    <div v-for="item in items" :key="item.id">
-      {{ item.title }}
-      {{ item.body }}
+    <div class="createdNote" v-for="item in items" :key="item.id">
+     <span class="titleNote"> {{ item.title }} </span>
+     <span class="bodyNote"> {{ item.body }}</span>
+     <span class="updateTime">{{ item.updatedAt }}</span>
       <button @click.prevent="deleteNote(item.id)">Delete</button>
       <button @click.prevent="editNote(item.id)">Edit</button>
     </div>
+     <NotesList />
   </div>
  
 </template>
