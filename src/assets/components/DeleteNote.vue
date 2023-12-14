@@ -3,6 +3,13 @@
   </template>
 <script setup>
 import { ref } from 'vue';
+import NoteList from "@/assets/components/NoteList.vue"
+const url = "http://localhost:3000/notes/"
+let items = ref([]);
+const props = 
+defineProps
+({items:Object})
+// console.log(props.items)
 const deleteNote = (id) => {
     fetch(url + id, {
       method: "DELETE",
@@ -14,6 +21,9 @@ const deleteNote = (id) => {
           
           items.value = data;
           displayNote();
+          deleteNote();
+          console.log(props.items)
+          
         }
   
       );
