@@ -1,52 +1,22 @@
 {
   "notes": [
     {
-      "title": "jy",
-      "body": "lo",
+      "title": "?A new note with a body",
+      "body": "body of text is here. how are you",
       "updatedAt": "2023-12-05T04:06:07.743Z",
       "id": 15
     },
     {
-      "title": "oo",
-      "body": "ee",
+      "title": "title",
+      "body": "a new body for a new note",
       "updatedAt": "2023-12-05T04:11:00.123Z",
       "id": 16
     },
     {
-      "title": "lll",
-      "body": "r",
+      "title": "title II",
+      "body": "a short body of text for my vue note. this was a hard project",
       "updatedAt": "2023-12-05T04:17:18.366Z",
       "id": 17
-    },
-    {
-      "title": "changed",
-      "body": "made",
-      "id": 19
-    },
-    {
-      "title": "changed",
-      "body": "made again",
-      "id": 20
-    },
-    {
-      "title": "another",
-      "body": "note",
-      "id": 21
-    },
-    {
-      "title": "",
-      "body": "",
-      "id": 22
-    },
-    {
-      "title": "oh",
-      "body": "yea",
-      "id": 23
-    },
-    {
-      "title": "ds",
-      "body": "sd",
-      "id": 24
     },
     {
       "title": "new note 2",
