@@ -1,0 +1,27 @@
+.add-note-form {
+  display: block;
+}
+
+.note-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 2%;
+}
+
+.titleNote {
+  display: flex;
+  width: 90px;
+  height: 90px;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.bodyNote {
+  display: flex;
+  width: 90px;
+  height: 90px;
+  align-content: center;
+  flex-wrap: wrap;
+}
